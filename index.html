@@ -1,21 +1,18 @@
-<!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8"/>
-<title>Teste Push PWA</title>
-        <!-- PushAlert -->
-<script type="text/javascript">
-        (function(d, t) {
-                var g = d.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-                g.src = "https://cdn.pushalert.co/integrate_20289d45071586695858a6aa3f842f39.js";
-                s.parentNode.insertBefore(g, s);
-        }(document, "script"));
-</script>
-<!-- End PushAlert -->
-</head>
-<body>
-<!-- Conteúdo -->
-    Aqui vai o código HTML que fará seu site aparecer.
-</body>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
+  </head>
+  <style>
+    div {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+  </style>
+  <body>
+    <div id="token"></div>
+    <div id="message"></div>
+    <div id="error"></div>
+    <script src="index.js"></script>
+  </body>
 </html>

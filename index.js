@@ -16,28 +16,25 @@ const firebaseConfig = {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const messaging = firebase.messaging();
 
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+messaging
+  .requestPermission()
+  .then(() => {
+    message.innerHTML = "Notifications allowed";
+    return messaging.getToken();
+  })
+  .then(token => {
+    tokenString.innerHTML = "Token Is : " + token;
+  })
+  .catch(err => {
+    errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;
+    console.log("No permission to send push", err);
+  });
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDZw0enmJRnC5lOd0KgHARt7zyLnGiW5oc",
-    authDomain: "testepushpwamfc.firebaseapp.com",
-    projectId: "testepushpwamfc",
-    storageBucket: "testepushpwamfc.appspot.com",
-    messagingSenderId: "539926553453",
-    appId: "1:539926553453:web:500c5818d625a84030f064",
-    measurementId: "G-SMSQ3Z8T1Z"
-  };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+messaging.onMessage(payload => {
+  console.log("Message received. ", payload);
+  const { title, ...options } = payload.notification;
+});
